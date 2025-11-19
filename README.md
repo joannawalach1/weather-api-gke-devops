@@ -2,7 +2,6 @@
 
 # Weather API - GKE + CI/CD Pipeline
 
-![GitHub Workflow Status](https://github.com/joannawalach1/weather-api-gke-cicd/actions/workflows/cloudbuild.yaml/badge.svg)
 
 ## Opis projektu
 
@@ -48,12 +47,14 @@ Projekt demonstruje pełny pipeline DevOps na Google Cloud Platform (GCP) z wyko
    
 2. Zbuduj aplikację i uruchom lokalnie:
 
+  ```bash
 mvn clean package
 java -jar target/*.jar
 
 
-3. Aplikacja będzie dostępna pod adresem: http://localhost:8081/api/weather
+3. Aplikacja będzie dostępna pod adresem: http://localhost:8081/
 
-Budowa i uruchomienie kontenera lokalnie
+  ```bash
 docker build -t weather-api .
 docker run -p 8081:8081 weather-api
+
