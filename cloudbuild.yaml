@@ -1,3 +1,12 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _REGION: "us-central1"
+  _AR_REPO: "weather-repo"
+  _IMAGE: "weather-api"
+  _CLUSTER: "moj-gke-klaster"
+
 steps:
   # 1. Build JAR
   - name: 'maven:3.8.4-openjdk-17'
@@ -10,7 +19,7 @@ steps:
       [
         "build",
         "-t",
-        "us-central1-docker.pkg.dev/group-project-478615/weather-repo/weather-api:latest",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_IMAGE}:latest",
         "."
       ]
 
@@ -19,31 +28,33 @@ steps:
     args:
       [
         "push",
-        "us-central1-docker.pkg.dev/group-project-478615/weather-repo/weather-api:latest"
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_IMAGE}:latest"
       ]
 
-  # 4. Deploy to GKE
+  # 4. Authenticate to GKE cluster
+  # same as: gcloud container clusters get-credentials moj-gke-klaster --region=us-central1
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "container",
+        "clusters",
+        "get-credentials",
+        "${_CLUSTER}",
+        "--region=${_REGION}",
+        "--project=$PROJECT_ID"
+      ]
+
+  # 6. Apply configs 
   - name: "gcr.io/cloud-builders/kubectl"
     args:
       [
         "apply",
         "-f",
-        "k8s/deployment.yaml"
+        "k8s/"
       ]
     env:
-      - "CLOUDSDK_COMPUTE_REGION=us-central1"
-      - "CLOUDSDK_CONTAINER_CLUSTER=moj-gke-klaster"
-
-  - name: "gcr.io/cloud-builders/kubectl"
-    args:
-      [
-        "apply",
-        "-f",
-        "k8s/service.yaml"
-      ]
-    env:
-      - "CLOUDSDK_COMPUTE_REGION=us-central1"
-      - "CLOUDSDK_CONTAINER_CLUSTER=moj-gke-klaster"
+      - "CLOUDSDK_COMPUTE_REGION=${_REGION}"
+      - "CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}"
 
 images:
-  - "us-central1-docker.pkg.dev/group-project-478615/weather-repo/weather-api:latest"
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_IMAGE}:latest"
