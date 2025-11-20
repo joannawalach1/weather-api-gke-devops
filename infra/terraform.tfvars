@@ -6,6 +6,7 @@ subnetwork = "gke-subnet"
 
 github_owner = "joannawalach1"
 github_repo  = "weather-api-gke-devops"
+github_connection = "us-central1-connection"
 
 gke_cluster_name = "moj-gke-klaster"
 gke_machine_type = "e2-micro"
