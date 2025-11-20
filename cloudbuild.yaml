@@ -70,4 +70,4 @@ steps:
       - "CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}"
 
 images:
-  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_IMAGE}:latest"
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_AR_REPO}/${_IMAGE}:${SHORT_SHA}"
