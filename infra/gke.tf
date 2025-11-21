@@ -18,14 +18,13 @@ resource "google_container_cluster" "primary" {
         "APISERVER",
         "SCHEDULER",
         "CONTROLLER_MANAGER",
-        "WORKLOADS"
+        "POD"
       ]
     }
 
     logging_config {
       enable_components = [
         "SYSTEM_COMPONENTS",
-        "POD",
         "APISERVER"
       ]
     }
