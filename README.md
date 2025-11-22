@@ -50,11 +50,13 @@ Some resources was created manually:
 - **Cloud Build Trigger** - GitHub connection requires browser-based OAuth authorization
 - **GCS Bucket for Terraform Backend** - The bucket used to store Terraform state remotely must exist before Terraform is initialized
 
-# Cluster GKE
+---
+
+## ☸️ Cluster GKE
 
 This repository contains a Terraform configuration (gke.tf, network.tf), that provisions a basic Kubernetes environment on Google Cloud Platform (GCP) using Google Kubernetes Engine (GKE).
 
-## Cluster configuration:
+### 🛰️ Cluster configuration:
 
 - VPC network – custom VPC named 'gke-network' with automatic subnet creation disabled.
 - Subnetwork – subnet 'gke-subnet' in region 'us-central1' with CIDR range '10.0.0.0/16', attached to the custom VPC.
@@ -93,7 +95,18 @@ To allow Cloud Build to push images and deploy them to GKE, several IAM roles we
 
 - **roles/artifactregistry.writer** – allows pushing Docker images to Artifact Registry  
 - **roles/container.developer** – allows deploying workloads to the GKE cluster (`kubectl apply`, updating Deployments)  
-- **roles/container.clusterViewer** (optional) – grants read access to cluster metadata when required  
+- **roles/container.clusterViewer** (optional) – grants read access to cluster metadata when required
+
+In addition, a dedicated service account for Cloud Build trigger was created.
+This account is used specifically by the GitHub-triggered pipeline and requires broader access:
+
+- **roles/cloudbuild.builds.editor** – allows running Cloud Build jobs
+- **roles/storage.admin** – required for accessing build logs and temporary artifacts
+- **roles/artifactregistry.writer** – enables pushing images to Artifact Registry
+- **roles/container.clusterViewer** – provides read access to cluster metadata
+- **roles/container.developer** – necessary for applying Kubernetes manifests and deploying workloads
+
+This separation ensures that both the main Cloud Build pipeline and the trigger service account have only the permissions required for secure and reliable CI/CD operation.
 
 ---
 
@@ -140,5 +153,6 @@ Billing report is included in the BILLING_REPORT.md file.
 - Kwolek Emilia
 - Morawska Katarzyna
 - Wałach Joanna
+
 
 
