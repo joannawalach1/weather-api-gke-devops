@@ -8,7 +8,7 @@ github_owner = "joannawalach1"
 github_repo  = "weather-api-gke-devops"
 
 gke_cluster_name = "moj-gke-klaster"
-gke_machine_type = "e2-micro"
+gke_machine_type = "e2-small"
 gke_node_pool_name   = "primary-nodes"
 gke_node_count     = 1
 

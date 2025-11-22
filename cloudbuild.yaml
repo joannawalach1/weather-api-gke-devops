@@ -44,14 +44,14 @@ steps:
         "--project=$PROJECT_ID",
       ]
 
-  # 6. Apply configs
+  # 5. Apply configs
   - name: "gcr.io/cloud-builders/kubectl"
     args: ["apply", "-f", "k8s/"]
     env:
       - "CLOUDSDK_COMPUTE_REGION=${_REGION}"
       - "CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}"
 
-  # 7. Update deployment image in GKE
+  # 6. Update deployment image in GKE
   - name: "gcr.io/cloud-builders/kubectl"
     args:
       [

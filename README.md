@@ -85,4 +85,34 @@ To allow Cloud Build to push images and deploy them to GKE, several IAM roles we
 
 ---
 
-## Authors
+## ⚙️ **Kubernetes Manifests**
+
+### 📦 **Deployment (`weather-api`)**
+The Deployment defines how the application runs inside the GKE cluster.  
+It uses the container image built in Cloud Build and includes two key health checks:
+
+- **Readiness Probe**  
+  Ensures the pod is ready to receive traffic  
+  (`/actuator/health/readiness`)
+
+- **Liveness Probe**  
+  Ensures the application stays healthy and restarts if needed  
+  (`/actuator/health/liveness`)
+
+### 🌐 **Service (`LoadBalancer`)**
+A Service of type **LoadBalancer** exposes the application publicly.
+
+- Maps external port **80** to container port **8081**
+- Automatically provisions a Google Cloud external load balancer
+- Routes traffic to pods labeled `app: weather-api`
+
+This provides a stable public endpoint for accessing the Weather API.
+
+---
+
+## 👩‍💻 Authors
+
+- Gałuszkiewicz Katarzyna
+- Kwolek Emilia
+- Morawska Katarzyna
+- Wałach Joanna
