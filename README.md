@@ -41,6 +41,7 @@ The Terraform configuration is divided into modular files:
 - **network.tf** – VPC, subnet
 - **main.tf** – root config  
 - **variables.tf** – variable definitions  
+- **trigger_sa.tf** - service account for the Cloud Build Trigger
 - **terraform.tfvars** – variable values that doesnt need to be hidden
 
 ### 🚫 Not Managed by Terraform
@@ -60,7 +61,7 @@ This ensures versioned, traceable images and enables smooth rollouts on GKE.
 ---
 
 ## ⚙️ Cloud Build – Continuous Integration & Deployment
-Cloud Build is responsible for the complete CI/CD process of the Weather API project. It is automatically triggered by a **push trigger** connected to the main branch of the repository. The trigger watches for code changes and, whenever a new commit is pushed, it launches the pipeline responsible for building and deploying the application.
+Cloud Build is responsible for the complete CI/CD process of the Weather API project. It is automatically triggered by a **push trigger** connected to the main branch of the repository. The trigger watches for code changes and, whenever a new commit is pushed, it launches the pipeline responsible for building and deploying the application. The trigger executes builds using a custom Service Account (cloudbuild-trigger-sa), to ensure that only minimal permissions are granted.
 
 ### 🔄 Pipeline Overview
 The pipeline performs the following steps:

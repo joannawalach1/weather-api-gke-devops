@@ -1,24 +1,16 @@
-# Estimated costs reort
+# Estimated costs report
 Report of the estimated costs of the **weather-api** app created as a project for the GCP training, by Gałuszkiewicz Katarzyna, Kwolek Emilia, Morawska Katarzyna and Wałach Joanna.
 
 ## Resources used
 
 - GKE Standard, regional cluster in the **us-central1** region
-- in the cluster - 3 e2-micro nodes working 24/7 in the zones **us-central1-a, us-central1-b, us-central1-c**
+- in the cluster - 3 e2-small nodes working 24/7 in the zones **us-central1-a, us-central1-b, us-central1-c**
 - Cloud build trigger, billed for build time, run on push to the main branch in the github repository
 - Docker images stored in Artifact Registry
 - Cloud Operations enabled for logging and monitoring
 - External HTTP(S) Load Balancer
 
 Some resources are billed based on usage, therefore the raport holds only the estimates, based on the predicted usage.
-<!-- App calls an external API for most operations
-
-Logging volume: ~0.5 GB/day
-
-Monitoring metrics: ~300 MiB/month
-
-Light to moderate production usage -->
-
 
 
 ## Cost breakdown
@@ -28,7 +20,7 @@ Light to moderate production usage -->
 
 - cluster control plane costs $0.10 per hour, at 720 hours per month → $72 / month
 
-- worker nodes (3× e2-micro) cost $0.008376 per hour per node in the **us-central1** region, coming to 3 × 0.008376 × 720 → $18.09216  / month
+- worker nodes (3× e2-small) cost $0.0168 per hour per node in the **us-central1** region, coming to 3 × 0.0.0168 × 720 → $36.288  / month
 
 GKE total: ~$90.09 / month
 
@@ -77,10 +69,10 @@ Total Estimated Monthly Cost
 
 | Category | Cost |
 |---|---|
-|GKE (cluster + nodes)|	~$90.09|
+|GKE (cluster + nodes)|	~$108.29|
 |Cloud Build	|~$0.36|
 |Artifact Registry	|~$0.10|
 |Cloud Logging	|~$5–8|
 |Cloud Monitoring	|~$22–25|
 |Load Balancer / Networking|	~$5–15|
-|**Total**|~$122-138|
+|**Total**|~$140-156|
