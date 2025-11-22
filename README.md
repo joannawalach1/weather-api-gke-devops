@@ -11,8 +11,8 @@ The project demonstrates a complete DevOps pipeline on Google Cloud Platform (GC
 
 - 🏗️ **Terraform** - infrastructure as code (IaC)
 - 🧊 **Google Kubernetes Engine (GKE)** for running the application in containers
-- 🔧 **Cloud Build** for automated Docket image building and deployment
-- 📦 **Artifact Registry** as the Docket image repository
+- 🔧 **Cloud Build** for automated Docker image building and deployment
+- 📦 **Artifact Registry** as the Docker image repository
 - 🔁 **GitOps approach**, enabling automatic deployments after each push to the repository
 - 📊 **Cloud Monitoring** (Logging i Metrics) for observing the application and infrastructure
 - 🔐 IAM for controlling access to the cluster and CI/CD pipeline
@@ -52,7 +52,7 @@ Some resources was created manually:
 
 # Cluster GKE
 
-This repository contains a Terraform configuration (main.tf), that provisions a basic Kubernetes environment on Google Cloud Platform (GCP) using Google Kubernetes Engine (GKE).
+This repository contains a Terraform configuration (gke.tf, network.tf), that provisions a basic Kubernetes environment on Google Cloud Platform (GCP) using Google Kubernetes Engine (GKE).
 
 ## Cluster configuration:
 
@@ -140,4 +140,5 @@ Billing report is included in the BILLING_REPORT.md file.
 - Kwolek Emilia
 - Morawska Katarzyna
 - Wałach Joanna
+
 
